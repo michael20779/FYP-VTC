@@ -1,46 +1,18 @@
 {% extends "base.html" %}
 
-{% load i18n %}
+{% block content %}      
 
-{% block content %}
+{% load crispy_forms_tags %}
 
-<style type="text/css">
-  input {
-
-    border: 1px solid #ced4da !important;
-
-}
-</style>
-
-
-<div class="container">
-  <div class="row">
-
-    <div class="col-md-6 mt-5 offset-3">
-      <h1>{% trans "Sign In" %}</h1>
-
-
-<div class="socialaccount_ballot">
-
-  <ul class="socialaccount_providers">
-  </ul>
-
-  <div class="login-or">{% trans 'or' %}</div>
-
+<!--Login--> 
+<div class="container py-5">
+  <h1>Login</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ login_form|crispy }}
+    <button class="btn btn-primary" type="submit">Login</button>
+  </form>
+  <p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
 </div>
-
-
-  {% if redirect_field_value %}
-
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <a class="btn btn-outline-dark" href="#">{% trans "Forgot Password?" %}</a>
-  <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
-</form>
-
-    </div>
-  </div>
-</div>
-
 
 {% endblock %}
